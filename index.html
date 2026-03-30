@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Dock - Protein-Ligand Docking Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .molecule-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .timeline-line {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 molecule-bg">
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 gradient-bg opacity-10"></div>
+        
+        <!-- Animated Molecule Background -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-20">
+            <div class="relative">
+                <div class="absolute inset-0 gradient-bg rounded-full blur-3xl"></div>
+                <i class="fas fa-atom text-9xl float-animation gradient-text"></i>
+            </div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <h1 class="text-6xl md:text-7xl font-bold mb-6">
+                <span class="gradient-text">Dynamic Dock</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                A platform for protein–ligand docking and molecular dynamics preparation
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <button onclick="scrollToSection('features')" class="btn-gradient text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg">
+                    <i class="fas fa-rocket mr-2"></i> Get Started
+                </button>
+                <a href="https://github.com/vieira86/DynamicDock" target="_blank" class="bg-white border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-50 transition-all duration-300 shadow-lg">
+                    <i class="fab fa-github mr-2"></i> View on GitHub
+                </a>
+            </div>
+            
+            <!-- Download Section -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md mx-auto">
+                <h3 class="text-lg font-semibold mb-3 text-gray-800">
+                    <i class="fas fa-download mr-2 text-purple-600"></i> Download Dynamic Dock
+                </h3>
+                <p class="text-gray-600 mb-4">Get the latest version of our molecular docking platform</p>
+                <button onclick="downloadFromDrive()" class="w-full btn-gradient text-white px-6 py-3 rounded-lg font-semibold">
+                    <i class="fas fa-cloud-download-alt mr-2"></i> Download from Google Drive
+                </button>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 pulse-animation">
+            <i class="fas fa-chevron-down text-2xl text-purple-600"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">Powerful Features</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Everything you need for molecular docking and dynamics preparation
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4">
+                        <i class="fas fa-cube text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">PDB Structure Loading</h3>
+                    <p class="text-gray-600">Import protein structures from PDB files or fetch directly from the Protein Data Bank using PDB IDs.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Co-crystallized Ligand Detection</h3>
+                    <p class="text-gray-600">Automatically identify and extract ligands from protein structures for reference docking.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4">
+                        <i class="fas fa-bullseye text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Active Site Identification</h3>
+                    <p class="text-gray-600">Intelligent detection of binding pockets and active sites using geometric and chemical analysis.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4">
+                        <i class="fas fa-link text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Molecular Docking</h3>
+                    <p class="text-gray-600">High-performance docking using AutoDock Vina with flexible ligand and receptor options.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4">
+                        <i class="fas fa-file-export text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Results Export</h3>
+                    <p class="text-gray-600">Export docking results in multiple formats including PDB, SDF, and detailed analysis reports.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-4">
+                        <i class="fas fa-atom text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">MD Preparation</h3>
+                    <p class="text-gray-600">Prepare protein-ligand complexes for molecular dynamics simulations with proper parameterization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">How It Works</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Simple four-step workflow for molecular docking
+                </p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full timeline-line"></div>
+                
+                <!-- Steps -->
+                <div class="space-y-12">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2 md:text-right">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                                <h3 class="text-2xl font-bold mb-3 gradient-text">Step 1: Upload Protein</h3>
+                                <p class="text-gray-600">Upload your protein structure file or enter a PDB ID to fetch from the database.</p>
+                            </div>
+                        </div>
+                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center z-10">
+                            <span class="text-white font-bold text-xl">1</span>
+                        </div>
+                        <div class="md:w-1/2"></div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2"></div>
+                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center z-10">
+                            <span class="text-white font-bold text-xl">2</span>
+                        </div>
+                        <div class="md:w-1/2">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                                <h3 class="text-2xl font-bold mb-3 gradient-text">Step 2: Identify Binding Site</h3>
+                                <p class="text-gray-600">Our algorithm automatically detects potential binding pockets and active sites.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2 md:text-right">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                                <h3 class="text-2xl font-bold mb-3 gradient-text">Step 3: Run Docking</h3>
+                                <p class="text-gray-600">Execute high-performance molecular docking using AutoDock Vina engine.</p>
+                            </div>
+                        </div>
+                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center z-10">
+                            <span class="text-white font-bold text-xl">3</span>
+                        </div>
+                        <div class="md:w-1/2"></div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/2"></div>
+                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center z-10">
+                            <span class="text-white font-bold text-xl">4</span>
+                        </div>
+                        <div class="md:w-1/2">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg card-hover">
+                                <h3 class="text-2xl font-bold mb-3 gradient-text">Step 4: Download Results</h3>
+                                <p class="text-gray-600">Get your docking results with detailed analysis and prepared files for MD simulations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scientific Purpose Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-center">
+                    <span class="gradient-text">Scientific Purpose</span>
+                </h2>
+                <div class="space-y-4 text-lg text-gray-700">
+                    <p>
+                        Dynamic Dock is designed to streamline the molecular docking workflow, making computational drug discovery and structural biology research more accessible and reproducible. Our platform automates complex procedures while maintaining scientific rigor.
+                    </p>
+                    <p>
+                        By integrating automated workflow management with powerful docking algorithms, we enable researchers to focus on scientific insights rather than technical implementation. The platform serves both educational purposes, helping students learn molecular docking concepts, and research applications, supporting advanced drug discovery projects.
+                    </p>
+                    <p>
+                        Every step is documented and reproducible, ensuring that your computational experiments can be validated and shared with the scientific community. Dynamic Dock bridges the gap between complex computational tools and user-friendly interfaces.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 px-4 gradient-bg">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+                Ready to Get Started?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Join thousands of researchers using Dynamic Dock for molecular docking and dynamics preparation
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="scrollToSection('features')" class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg">
+                    <i class="fas fa-play mr-2"></i> Try the Platform
+                </button>
+                <a href="https://github.com/vieira86/DynamicDock" target="_blank" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-purple-600 transition-all duration-300">
+                    <i class="fas fa-code mr-2"></i> Access Source Code
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 gradient-text">Dynamic Dock</h3>
+                    <p class="text-gray-400">
+                        Advanced molecular docking platform for protein-ligand interactions and molecular dynamics preparation.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="https://github.com/vieira86/DynamicDock" target="_blank" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/vieira86/DynamicDock" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-github text-2xl"></i>
+                        </a>
+                        <a href="#" onclick="downloadFromDrive()" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fas fa-download text-2xl"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 mt-4 text-sm">
+                        © 2024 Dynamic Dock. Open source and free for scientific research.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Google Drive download function
+        function downloadFromDrive() {
+            // Replace this with your actual Google Drive file ID
+            const googleDriveFileId = 'Dynamic_Dock_Mac';
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
+            
+            // Create a temporary link to trigger download
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'DynamicDock.zip';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show notification
+            showNotification('Download started! Check your downloads folder.');
+        }
+
+        // Notification system
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300';
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Add scroll animations
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.float-animation');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
