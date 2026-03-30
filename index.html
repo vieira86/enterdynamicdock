@@ -336,7 +336,7 @@
                     </ul>
                 </div>
                 
-                <div>
+                <!-- <div>
                     <h4 class="text-lg font-semibold mb-4">Connect</h4>
                     <div class="flex space-x-4">
                         <a href="https://github.com/vieira86/DynamicDock" target="_blank" class="text-gray-400 hover:text-white transition-colors">
@@ -349,7 +349,37 @@
                     <p class="text-gray-400 mt-4 text-sm">
                         © 2024 Dynamic Dock. Open source and free for scientific research.
                     </p>
-                </div>
+                </div> -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">About the Author</h4>
+                    
+                    <div class="flex items-center space-x-4">
+                        <!-- Foto -->
+                        <img src="https://github.com/vieira86.png" 
+                            alt="Rafael Vieira" 
+                            class="w-16 h-16 rounded-full border-2 border-purple-500 shadow-lg">
+
+                        <!-- Infos -->
+                        <div>
+                            <p class="font-semibold text-white">Prof. Rafael Vieira</p>
+                            <p class="text-sm text-gray-400">Chemoinformatics</p>
+                            <p class="text-sm text-gray-400">rafael.vieira@ifro.edu.br</p>
+                        </div>
+                    </div>
+
+                    <!-- Social -->
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://github.com/vieira86" target="_blank"
+                        class="flex items-center space-x-2 text-gray-400 hover:text-white transition">
+                            <i class="fab fa-github text-xl"></i>
+                            <span>GitHub</span>
+                        </a>
+                    </div>
+
+    <p class="text-gray-400 mt-4 text-sm">
+        © 2026 Dynamic Dock. Developed for scientific research.
+    </p>
+</div>
             </div>
         </div>
     </footer>
@@ -366,8 +396,8 @@
         // Google Drive download function
         function downloadFromDrive() {
             // Replace this with your actual Google Drive file ID
-            //const googleDriveFileId = 'Dynamic_Dock_Mac';
-            const downloadUrl = `https://drive.google.com/file/d/1a9TssH-Mn4glEdyYqgc2b4FclZtYhBUW/view?usp=share_link`;
+            const googleDriveFileId = 'Dynamic_Dock_Mac';
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${googleDriveFileId}`;
             
             // Create a temporary link to trigger download
             const link = document.createElement('a');
